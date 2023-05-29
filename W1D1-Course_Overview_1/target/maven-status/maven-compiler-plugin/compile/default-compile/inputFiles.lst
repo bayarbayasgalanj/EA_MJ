@@ -1,0 +1,12 @@
+/Users/bayasaa/workspace/EA_MJ/W1D1-Course_Overview_1/src/main/java/cs544/cov1/domain/Email.java
+/Users/bayasaa/workspace/EA_MJ/W1D1-Course_Overview_1/src/main/java/cs544/cov1/domain/Phone.java
+/Users/bayasaa/workspace/EA_MJ/W1D1-Course_Overview_1/src/main/java/cs544/cov1/domain/Contact.java
+/Users/bayasaa/workspace/EA_MJ/W1D1-Course_Overview_1/src/main/java/cs544/cov1/dao/ContactDao.java
+/Users/bayasaa/workspace/EA_MJ/W1D1-Course_Overview_1/src/main/java/cs544/cov1/Application.java
+/Users/bayasaa/workspace/EA_MJ/W1D1-Course_Overview_1/src/main/java/cs544/cov1/web/ContactController.java
+/Users/bayasaa/workspace/EA_MJ/W1D1-Course_Overview_1/src/main/java/cs544/cov1/web/EmailController.java
+/Users/bayasaa/workspace/EA_MJ/W1D1-Course_Overview_1/src/main/java/cs544/cov1/web/PhoneController.java
+/Users/bayasaa/workspace/EA_MJ/W1D1-Course_Overview_1/src/main/java/cs544/cov1/web/MyErrorController.java
+/Users/bayasaa/workspace/EA_MJ/W1D1-Course_Overview_1/src/main/java/cs544/cov1/service/ContactService.java
+/Users/bayasaa/workspace/EA_MJ/W1D1-Course_Overview_1/src/main/java/cs544/cov1/MvcConfig.java
+/Users/bayasaa/workspace/EA_MJ/W1D1-Course_Overview_1/src/main/java/cs544/cov1/WebSecurityConfig.java

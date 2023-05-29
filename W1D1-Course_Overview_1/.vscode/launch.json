@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<Course_Overview_1>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "cs544.cov1.Application",
+            "projectName": "Course_Overview_1",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
