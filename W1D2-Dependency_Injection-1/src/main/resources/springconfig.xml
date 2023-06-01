@@ -3,7 +3,17 @@
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="greeting" class="edu.miu.cs544.Greeting">
+    <!-- <bean id="greeting" class="edu.miu.cs544.Greeting">
         <property name="greeting" value="Hello World from XML Group 4 Part C" />
+    </bean> -->
+    <bean id="classA" class="edu.miu.cs544.ClassA" init-method="init" destroy-method="destroy" scope="prototype">
+        <constructor-arg  value="Hello" />
+        <property name="classB" ref="classB" />
+    </bean>
+    <bean id="classB" class="edu.miu.cs544.ClassB" init-method="init" destroy-method="destroy" lazy-init="true">
+        <property name="text" value="World" />
+    </bean>
+    <bean id="classC" class="edu.miu.cs544.ClassC">
+        
     </bean>
 </beans>
