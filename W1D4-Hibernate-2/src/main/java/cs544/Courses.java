@@ -12,8 +12,8 @@ public class Courses {
   @Id
   @Column(name = "\"id\"", nullable = false)
   private Integer id;
-  @Column(name = "\"name\"", nullable = true)
-  private String name;
   @Column(name = "\"teacher_id\"", nullable = false)
   private Integer teacherId;
+  @Column(name = "\"name\"", nullable = true)
+  private String name;
 }

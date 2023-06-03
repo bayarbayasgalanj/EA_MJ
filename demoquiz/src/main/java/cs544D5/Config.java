@@ -1,6 +1,4 @@
-package cs544;
-
-import org.springframework.context.annotation.Bean;
+package cs544D5;
 
 import org.springframework.context.annotation.ComponentScan;
 
