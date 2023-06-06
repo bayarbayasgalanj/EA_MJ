@@ -25,10 +25,8 @@ public class App {
 
                 // a) TODO: Flights leaving USA capacity > 500
                 System.out.println("Question A:");
-                List<Flight> flights = em.createQuery("from Flight f"+
-                " JOIN f.airplane as a "+
-                " JOIN f.origin as ap "+
-                " where a.capacity > 500 and ap.country = 'USA'"
+                List<Flight> flights = em.createQuery("from Flight f"
+                +" where f.airplane.capacity > 500 and f.origin.country = 'USA'"
                 , Flight.class).getResultList();
                 System.out.printf("%-9s%-31s%-31s\n", "Flight:", "Departs:", "Arrives:");
                 for (Flight flight : flights) {
@@ -69,7 +67,6 @@ public class App {
                 // c) TODO: Flights using 747 planes that don't belong to Star Alliance
                 System.out.println("Question C:");
                 flights = em.createQuery("from Flight as f "
-                // +" JOIN al.flights as f "
                 +" where f.airplane.model = '747' and f.airline.name!='Star Alliance'"
                 , Flight.class).getResultList();
                 System.out.printf("%-9s%-31s%-31s\n", "Flight:", "Departs:",
