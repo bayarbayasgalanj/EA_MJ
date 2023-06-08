@@ -1,19 +1,26 @@
 package cs544;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.persistence.EntityGraph;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
+import java.util.List;
+
+@Repository
+@Transactional(propagation = Propagation.MANDATORY)
 public class StudentDAO {
 
-    public Student load(long studentid) {
-        EntityManager em = EntityManagerHelper.getCurrent();
-        EntityGraph<Student> graph = em.createEntityGraph(Student.class);
-        graph.addAttributeNodes("courselist");
-        Map<String, Object> hints = new HashMap<String,Object>();
-        hints.put("javax.persistence.fetchgraph", graph); 
-        return em.find(Student.class, studentid, hints);
+    @PersistenceContext
+    private EntityManager em;
+    
+    public List<Student> getAll() {
+        return em.createQuery("from Student", Student.class).getResultList();
+    }
+
+    public Student load(long studentId) {
+        return em.find(Student.class, studentId);
     }
 }
