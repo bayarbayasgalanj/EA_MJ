@@ -1,0 +1,34 @@
+package cs544;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+
+public class EntityManagerHelper {
+    private static final EntityManagerFactory emf;
+    private static final ThreadLocal<EntityManager> threadLocal;
+    static {
+        emf = Persistence.createEntityManagerFactory("cs544");
+        threadLocal = new ThreadLocal<EntityManager>();
+    }
+    
+    public static EntityManager getCurrent() {
+        EntityManager em = threadLocal.get();
+        if (em == null || !em.isOpen()) {
+            em = emf.createEntityManager();
+            threadLocal.set(em);
+        }
+        return em;
+    }
+    public static void closeEntityManager() {
+        EntityManager em = threadLocal.get();
+        if (em != null) {
+            em.close();
+            threadLocal.remove();
+        }
+    }
+    public static void closeEntityManagerFactory() {
+        emf.close();
+    }
+}
+
