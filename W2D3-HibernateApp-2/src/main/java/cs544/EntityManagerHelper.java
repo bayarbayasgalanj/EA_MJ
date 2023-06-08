@@ -17,6 +17,7 @@ public class EntityManagerHelper {
         if (em == null || !em.isOpen()) {
             em = emf.createEntityManager();
             threadLocal.set(em);
+            // em.close();
         }
         return em;
     }
