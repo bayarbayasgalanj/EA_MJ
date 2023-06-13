@@ -27,24 +27,14 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/index", "/login", "/logout").permitAll()
-                .requestMatchers(HttpMethod.GET, "/addCar").hasRole("ADMIN").requestMatchers(HttpMethod.POST)
-                .hasRole("ADMIN").requestMatchers(HttpMethod.GET, "/cars").hasRole("USER"))
+                .requestMatchers("/", "/index", "/login", "/logout")
+                .permitAll()
+                .requestMatchers(HttpMethod.GET, "/add").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST).hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/cars").hasRole("USER")
+                .requestMatchers(HttpMethod.GET, "/cars/**").hasRole("ADMIN"))
                 .formLogin(Customizer.withDefaults()).logout(Customizer.withDefaults());
         return http.build();
     }
-    // http.authorizeHttpRequests(auth ->
-    // auth.requestMatchers("/important/**").hasRole("USER"))
-    // .formLogin(Customizer.withDefaults())
-    // .logout(Customizer.withDefaults());
 
-    // @Bean
-    // public SecurityFilterChain securityFilterChain(HttpSecurity http) throws
-    // Exception {
-    // http.authorizeHttpRequests(auth -> auth
-    // .requestMatchers(HttpMethod.GET, "/addContact")
-    // .hasRole("ADMIN"));
-    // return http.build();
-
-    // }
 }
