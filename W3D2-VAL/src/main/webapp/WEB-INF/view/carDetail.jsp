@@ -39,7 +39,15 @@
 			<button type="submit">Delete</button>
 		</form>
 	</c:if>
-	
+	<sec:authorize access="!isAuthenticated()">
+		<p><a href="login">Login</a></p>
+	</sec:authorize>
+	<sec:authorize access="isAuthenticated()">
+		<p>Welcome Back,
+			<sec:authentication property="name" />
+		</p>
+		<p><a href="logout">Logout</a></p>
+	</sec:authorize>
 </body>
 
 </html>
