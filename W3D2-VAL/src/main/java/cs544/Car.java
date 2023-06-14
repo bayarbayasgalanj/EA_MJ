@@ -1,23 +1,37 @@
 package cs544;
 
+import org.hibernate.validator.constraints.Range;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 public class Car {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@NotBlank(message = "Make is required")
 	private String make;
+	@NotBlank
 	private String model;
+	@Range(min = 1940, max = 2015)
 	private int year;
+	@NotBlank
 	private String color;
 	
 	public Car() {
 	}
-
+	// public Car(String make, String model, int year, String color) {
+	// 	super();
+	// 	this.make = make;
+	// 	this.model = model;
+	// 	this.year = year;
+	// 	this.color = color;
+	// }
 	public Car(String make, String model, int year, String color) {
 		super();
 		this.make = make;

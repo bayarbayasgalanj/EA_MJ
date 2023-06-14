@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Update a Car</title>
+    <title>Add a Car</title>
     <style>
         .errorblock {
     color: red;
@@ -16,8 +16,8 @@
       </style>
 </head>
 <body>
-	<h1>Update a Car</h1>
-	<form:form modelAttribute="car"  action="${car.id}" method="post">
+    <h1>Add a Car</h1>
+    <form:form modelAttribute="car" action="addCar" method="post">
         <form:errors path="*" cssClass="errorblock" element="div" />
         <table>
             <tr>
@@ -49,8 +49,7 @@
                 </td>
             </tr>
         </table>
-        <input type="submit" value="Update Car" />
-		
+        <input type="submit" value="Add Car" />
     </form:form>
 </body>
 </html>

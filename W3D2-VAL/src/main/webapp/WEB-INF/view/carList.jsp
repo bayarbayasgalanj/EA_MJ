@@ -20,13 +20,20 @@
 				<td>${car.model}</td>
 				<td>${car.year}</td>
 				<td>${car.color}</td>
-				<td><a href="cars/${car.id}">edit</a></td>
+				<td><a href="cars/update/${car.id}">edit</a></td>
+				<!-- <td>
+					<td><a href="cars/delete/${car.id}" method="post">delete</a></td>
+					<form action="cars/delete/${car.id}" method="post">
+						<button type="submit">Delete</button>
+					</form>
+				</td> -->
+				
 			</tr>
 		</c:forEach>
 	</table>
 
 	<sec:authorize access="hasRole('ADMIN')">
-		<a href="cars/add"> Add a Car</a>
+		<a href="cars/addCar"> Add a Car</a>
 	</sec:authorize>
 	<sec:authorize access="!isAuthenticated()">
 		<p><a href="login">Login</a></p>

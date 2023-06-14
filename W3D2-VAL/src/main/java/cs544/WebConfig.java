@@ -15,12 +15,12 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @ComponentScan("cs544")
 public class WebConfig implements WebMvcConfigurer {
-    // @Bean
-    // public MessageSource messageSource() {
-    //     ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-    //     messageSource.setBasename("i18/errormsg");
-    //     return messageSource;
-    // }
+    @Bean
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.setBasename("i18/errormsg");
+        return messageSource;
+    }
 
     @Bean
     public ViewResolver viewResolver() {
