@@ -27,57 +27,59 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan("cs544")
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages = "cs544") // Specify the base package for JPA repositories
 public class Config implements WebMvcConfigurer {
-	@Bean
-	public ViewResolver viewResolver() {
-		InternalResourceViewResolver bean = new InternalResourceViewResolver();
 
-		bean.setViewClass(JstlView.class);
-		bean.setPrefix("/WEB-INF/view/");
-		bean.setSuffix(".jsp");
+    @Bean
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver bean = new InternalResourceViewResolver();
 
-		return bean;
-	}
+        bean.setViewClass(JstlView.class);
+        bean.setPrefix("/WEB-INF/view/");
+        bean.setSuffix(".jsp");
+
+        return bean;
+    }
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
 
-	@Bean
-	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUsername("root");
-		dataSource.setPassword("root");
-		dataSource.setUrl("jdbc:mysql://localhost/cs544W3D1P2?useSSL=false");
-		return dataSource;
-	}
-
-	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
-		emf.setDataSource(dataSource());
-		emf.setPackagesToScan("cs544");
-
-		Properties properties = new Properties();
-		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-		properties.setProperty("hibernate.id.new_generator_mappings", "false");
-        properties.setProperty("hibernate.show_sql", "true");
-        properties.setProperty("hibernate.format_sql", "true");
-		properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-
-		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		emf.setJpaVendorAdapter(vendorAdapter);
-		emf.setJpaProperties(properties);
-		return emf;
-	}
+    @Bean
+    public DataSource dataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setUsername("root");
+        dataSource.setPassword("root");
+        dataSource.setUrl("jdbc:mysql://localhost/cs544W3D1P2?useSSL=false");
+        return dataSource;
+    }
 
     @Bean
-	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
-	    JpaTransactionManager transactionManager = new JpaTransactionManager();
-	    transactionManager.setEntityManagerFactory(emf);
-	    return transactionManager;
-	}
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
+        emf.setDataSource(dataSource());
+        emf.setPackagesToScan("cs544");
+        
+        // Use Hibernate JpaVendorAdapter
+        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        emf.setJpaVendorAdapter(vendorAdapter);
+        
+        // Configure Hibernate properties
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        properties.setProperty("hibernate.show_sql", "true");
+        emf.setJpaProperties(properties);
+
+        return emf;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(emf);
+        return transactionManager;
+    }
 }

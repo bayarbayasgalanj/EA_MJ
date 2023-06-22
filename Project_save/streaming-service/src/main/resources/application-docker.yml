@@ -1,0 +1,18 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /stream
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+spring:
+  rabbitmq:
+    host: rabbitmq
+#    port: 5672
+#    username: guest
+#    password: guest
+#logging:
+#  level:
+#    root: DEBUG

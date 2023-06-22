@@ -1,14 +1,16 @@
 package cs544;
 
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRegistration;
-
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.context.support.GenericWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
+
+import jakarta.servlet.DispatcherType;
+import jakarta.servlet.FilterRegistration;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import java.util.EnumSet;
 
 public class MyWebAppInitializer implements WebApplicationInitializer {
 
@@ -20,11 +22,18 @@ public class MyWebAppInitializer implements WebApplicationInitializer {
 
         // Manage the lifecycle of the root application context
         container.addListener(new ContextLoaderListener(rootContext));
-        
-		ServletRegistration.Dynamic appServlet = container.addServlet("mvc",
-				new DispatcherServlet(new GenericWebApplicationContext()));
-		appServlet.setLoadOnStartup(1);
-		appServlet.addMapping("/");
 
+        // Register the OpenEntityManagerInViewFilter
+        FilterRegistration.Dynamic filter = container.addFilter("openEntityManagerInViewFilter", OpenEntityManagerInViewFilter.class);
+        filter.setInitParameter("entityManagerFactoryBeanName", "entityManagerFactory");
+        filter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD), true, "/*");
+
+        // Create the Spring MVC application context
+        AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
+        dispatcherContext.register(Config.class);
+
+        // Create and register the DispatcherServlet
+        DispatcherServlet dispatcherServlet = new DispatcherServlet(dispatcherContext);
+        container.addServlet("mvc", dispatcherServlet).addMapping("/");
     }
 }

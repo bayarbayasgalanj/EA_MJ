@@ -1,6 +1,6 @@
 package cs544D5;
 
-import javax.annotation.PreDestroy;
+// import javax.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -19,8 +19,8 @@ public class BClass {
         return text;
     }
 
-    @PreDestroy
-    public void done() {
-        System.out.println("BClass done!");
-    }
+    // @PreDestroy
+    // public void done() {
+    //     System.out.println("BClass done!");
+    // }
 }

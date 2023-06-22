@@ -32,6 +32,7 @@ public class LogAspect {
     }
     @Around("execution(* cs544.CustomerDAO.save(..))")
 	public Object invoke(ProceedingJoinPoint call ) throws Throwable { 
+        System.out.println(" ---------- START ---------");
 		StopWatch sw = new StopWatch(); 
         sw.start(call.getSignature().getName());
 		Object retVal = call.proceed();
